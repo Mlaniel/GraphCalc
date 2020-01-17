@@ -99,6 +99,7 @@ public class MatrixGridPane extends GridPane {
                     int c = j - 1;
                     Label l = new Label(Integer.toString(numMatrix[r][c]));
                     l.setPrefSize(30, 30);
+                    l.setAlignment(Pos.CENTER);
                     labels[r][c] = l;
                     matrix.add(l, r, c);
 

@@ -14,7 +14,7 @@ public class MainPane extends BorderPane {
     public Spinner<Integer> input;
 
     public MainPane(MainController mc) {
-        input = new Spinner<Integer>(2, 15, 5);
+        input = new Spinner(2, 15, 5);
         addComponents();
         initEvents();
         this.mc = mc;
