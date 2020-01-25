@@ -6,6 +6,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import sample.control.MainController;
 
+import java.util.List;
+
 public class MainPane extends BorderPane {
 
     private MainController mc;
@@ -96,12 +98,19 @@ public class MainPane extends BorderPane {
 
         Label lBridge = new Label("Brücken: ");
         ergebnis.add(lBridge, 1, 0);
-        String[] cBridge = mc.getBridge();
+        int[] cBridge = mc.getBridge();
         for (int i = 1; i <= getInput(); i++) {
-            Label b = new Label("Knoten " + i + ": " + (cBridge[i - 1] == null ? "_" : "Brücke"));
+            Label b = new Label("Kante " + i + "-" + (i + 1) + ": " + (cBridge[i - 1] == 0 ? "_" : "Brücke"));
             ergebnis.add(b, 1, i);
         }
-//        Label
+
+        Label lKomponenten = new Label("Komponenten: ");
+        ergebnis.add(lKomponenten, 2, 0);
+        List<List<Integer>> comps = mc.getKomponenten();
+        for (int i = 1; i <= getInput(); i++) {
+            Label c = new Label("Komponente " + i + ": " + comps.get(i - 1));
+            ergebnis.add(c, 2, i);
+        }
     }
 
     public MatrixGridPane getMatrixPane() {
