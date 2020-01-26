@@ -63,6 +63,22 @@ public class MainController {
         int[] range = getBridge();
         int count = 0;
 
+        for (int i = 0; i < wd.getMatrix().length; i++) {
+            if (count != wd.getMatrix().length) {
+                int[] temp = new int[range.length];
+                for (int r = 0; r < wd.getMatrix().length; r++) {
+                    for (int c = 0; c < wd.getMatrix().length; c++) {
+                        temp[r] += (range[r] == 1 ? c : 0);
+                        count++;
+                    }
+                }
+                kompList.add(temp);
+            } else {
+                return kompList;
+            }
+        }
+
+
         for (int knoten : range) {
             if (knoten == 1) {
                 count++;
@@ -80,10 +96,12 @@ public class MainController {
 //            }
 
 
-    private int[] getKnotenSingle() {
+    private int[] getArtikulationen() {
         int[] tmp = new int[wd.getMatrix().length];
         for (int r = 0; r < wd.getMatrix().length; r++) {
-            tmp[r] = r + 1;
+            if (getGrade()[r] > 1) {
+                tmp[r] = r + 1;
+            }
         }
         return tmp;
     }

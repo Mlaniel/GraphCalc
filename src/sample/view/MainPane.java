@@ -1,12 +1,13 @@
 package sample.view;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import sample.control.MainController;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MainPane extends BorderPane {
 
@@ -80,7 +81,9 @@ public class MainPane extends BorderPane {
 
             center.add(dPane, 2, 2);
             center.add(new Label("Distanzmatrix"), 2, 1);
+
             center.add(ergebnis, 0, 3);
+            GridPane.setColumnSpan(ergebnis, 3);
         }
         setCenter(center);
     }
@@ -92,24 +95,32 @@ public class MainPane extends BorderPane {
         ergebnis.add(lGrade, 0, 0);
         int[] grad = mc.getGrade();
         for (int i = 1; i <= getInput(); i++) {
-            Label g = new Label("Grad(" + i + ")=" + grad[i - 1]);
+            Label g = new Label(" Grad(" + i + ")=" + grad[i - 1] + " ");
             ergebnis.add(g, 0, i);
         }
 
+        ergebnis.add(new Separator(), 1, 0);
+
         Label lBridge = new Label("Brücken: ");
-        ergebnis.add(lBridge, 1, 0);
+        ergebnis.add(lBridge, 2, 0);
         int[] cBridge = mc.getBridge();
         for (int i = 1; i <= getInput(); i++) {
-            Label b = new Label("Kante " + i + "-" + (i + 1) + ": " + (cBridge[i - 1] == 0 ? "_" : "Brücke"));
-            ergebnis.add(b, 1, i);
+            Label b = new Label(" Kante " + i + "-" + (i + 1) + ": " + (cBridge[i - 1] == 0 ? "_" : "Brücke "));
+            ergebnis.add(b, 2, i);
         }
 
+        ergebnis.add(new Separator(), 3, 0);
+
         Label lKomponenten = new Label("Komponenten: ");
-        ergebnis.add(lKomponenten, 2, 0);
-        List<List<Integer>> comps = mc.getKomponenten();
+        ergebnis.add(lKomponenten, 4, 0);
+        ArrayList<int[]> comps = mc.getKomponenten();
         for (int i = 1; i <= getInput(); i++) {
-            Label c = new Label("Komponente " + i + ": " + comps.get(i - 1));
-            ergebnis.add(c, 2, i);
+            String str = "";
+            for (int[] komp : comps) {
+                str += "{" + komp[i - 1] + "}";
+            }
+            Label c = new Label(" Komponente " + i + ": " + str);
+            ergebnis.add(c, 4, i);
         }
     }
 
