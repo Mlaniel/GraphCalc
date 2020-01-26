@@ -3,8 +3,6 @@ package sample.control;
 import sample.base.WegDistanz;
 import sample.view.MainPane;
 
-import java.util.ArrayList;
-
 public class MainController {
 
     private WegDistanz wd;
@@ -25,7 +23,6 @@ public class MainController {
     }
 
     public int[][] getDistance() {
-
         return wd.dMatrix.getMatrix();
     }
 
@@ -53,48 +50,11 @@ public class MainController {
         return str;
     }
 
-    /*
-    Needs to calculate each component individually
-    and store them in an int[] array,
-    which will be stored into an ArrayList
-     */
-    public ArrayList<int[]> getKomponenten() {
-        ArrayList<int[]> kompList = new ArrayList();
-        int[] range = getBridge();
-        int count = 0;
+    public String[] getKomponenten() {
+        String[] kompList = wd.getKanten();
 
-        for (int i = 0; i < wd.getMatrix().length; i++) {
-            if (count != wd.getMatrix().length) {
-                int[] temp = new int[range.length];
-                for (int r = 0; r < wd.getMatrix().length; r++) {
-                    for (int c = 0; c < wd.getMatrix().length; c++) {
-                        temp[r] += (range[r] == 1 ? c : 0);
-                        count++;
-                    }
-                }
-                kompList.add(temp);
-            } else {
-                return kompList;
-            }
-        }
-
-
-        for (int knoten : range) {
-            if (knoten == 1) {
-                count++;
-
-            }
-        }
-//        kompList.add(getKnotenSingle());
         return kompList;
     }
-
-//        for (int r = 0; r < wd.getMatrix().length; r++) {
-//            int[] val;
-//            for (int c = 0; c < wd.getMatrix().length; c++) {
-//                val[r] +=
-//            }
-
 
     private int[] getArtikulationen() {
         int[] tmp = new int[wd.getMatrix().length];

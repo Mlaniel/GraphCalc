@@ -7,8 +7,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import sample.control.MainController;
 
-import java.util.ArrayList;
-
 public class MainPane extends BorderPane {
 
     private MainController mc;
@@ -101,25 +99,21 @@ public class MainPane extends BorderPane {
 
         ergebnis.add(new Separator(), 1, 0);
 
-        Label lBridge = new Label("Brücken: ");
-        ergebnis.add(lBridge, 2, 0);
-        int[] cBridge = mc.getBridge();
-        for (int i = 1; i <= getInput(); i++) {
-            Label b = new Label(" Kante " + i + "-" + (i + 1) + ": " + (cBridge[i - 1] == 0 ? "_" : "Brücke "));
-            ergebnis.add(b, 2, i);
-        }
+//        Label lBridge = new Label("Brücken: ");
+//        ergebnis.add(lBridge, 2, 0);
+//        int[] cBridge = mc.getBridge();
+//        for (int i = 1; i <= getInput(); i++) {
+//            Label b = new Label(" Kante " + i + "-" + (i + 1) + ": " + (cBridge[i - 1] == 0 ? "_" : "Brücke "));
+//            ergebnis.add(b, 2, i);
+//        }
 
         ergebnis.add(new Separator(), 3, 0);
 
-        Label lKomponenten = new Label("Komponenten: ");
+        Label lKomponenten = new Label("Kanten: ");
         ergebnis.add(lKomponenten, 4, 0);
-        ArrayList<int[]> comps = mc.getKomponenten();
+        String[] comps = mc.getKomponenten();
         for (int i = 1; i <= getInput(); i++) {
-            String str = "";
-            for (int[] komp : comps) {
-                str += "{" + komp[i - 1] + "}";
-            }
-            Label c = new Label(" Komponente " + i + ": " + str);
+            Label c = new Label(comps[i - 1]);
             ergebnis.add(c, 4, i);
         }
     }

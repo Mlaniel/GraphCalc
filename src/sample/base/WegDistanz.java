@@ -44,9 +44,6 @@ public class WegDistanz extends Matrix {
     private void potenz(int[][] tmp) {
         int size = getMatrix().length;
         potenz = new int[size][size];
-//        potenz[][] = ergebnis     (Ergebnismatrix)
-//        tmpPotenz[][] = storage   (Zwischenspeicher)
-//        super matrix = adjazenz   (Adjazenz)
 
         for (int r = 0; r < size; r++) {
             for (int c = 0; c < size; c++) {
@@ -80,4 +77,14 @@ public class WegDistanz extends Matrix {
         return grade;
     }
 
+    public String[] getKanten() {
+        String[] tmp = new String[getMatrix().length];
+        for (int r = 0; r < getMatrix().length; r++) {
+            tmp[r] = "";
+            for (int c = r; c < getMatrix().length; c++) {
+                tmp[r] += (getValue(r, c) == 1 ? ("{" + (r + 1) + "-" + (c + 1) + "}") : "");
+            }
+        }
+        return tmp;
+    }
 }
