@@ -76,10 +76,10 @@ public class WegDistanz extends Matrix {
         }
     }
 
-    private ArrayList<Integer> getKnotenArray() {
-        ArrayList<Integer> temp = new ArrayList<>();
+    private int[] getKnotenArray() {
+        int[] temp = new int[getMatrix().length];
         for (int i = 0; i < getMatrix().length; i++) {
-            temp.add(i);
+            temp[i] = i + 1;
         }
         return temp;
     }
@@ -123,12 +123,12 @@ public class WegDistanz extends Matrix {
         for (int r = 0; r < getMatrix().length; r++) {
             for (int c = r; c < getMatrix().length; c++) {
                 if (getValue(r, c) == 1) {
-                    count[r]++;
-                    if (count[r] > 1 || count[c] > 1) {
-                        tmp.append("{" + (r + 1) + "-" + (c + 1) + "},");
-                    } else {
+                    if (count[r] <= 1) {
                         tmp.append("-{" + (r + 1) + "-" + (c + 1) + "}-,");
+                    } else {
+                        tmp.append("{" + (r + 1) + "-" + (c + 1) + "},");
                     }
+                    count[c]++;
                 }
             }
         }
@@ -143,7 +143,6 @@ public class WegDistanz extends Matrix {
         if (this.contains(wMatrix, 1)) {
             for (int r = 0; r < getMatrix().length; r++) {
                 ArrayList temp = new ArrayList();
-
                 for (int c = getMatrix().length - 1; c >= r; c--) {
                     if (wMatrix.getValue(r, c) == 1 && knoten.contains(c)) {
                         temp.add(0, c + 1);
@@ -155,6 +154,7 @@ public class WegDistanz extends Matrix {
                     komponenten.add(temp);
                 }
             }
+
         } else {
             for (int i = 0; i < getMatrix().length; i++) {
                 ArrayList temp = new ArrayList();
