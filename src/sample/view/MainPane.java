@@ -89,6 +89,9 @@ public class MainPane extends BorderPane {
     public void displayErgebnis() {
         ergebnis = new GridPane();
 
+        /*
+        Ausgabe Knotengrade
+         */
         Label lGrade = new Label("Knotengrade: ");
         ergebnis.add(lGrade, 0, 0);
         int[] grad = mc.getGrade();
@@ -99,22 +102,26 @@ public class MainPane extends BorderPane {
 
         ergebnis.add(new Separator(), 1, 0);
 
-//        Label lBridge = new Label("Brücken: ");
-//        ergebnis.add(lBridge, 2, 0);
-//        int[] cBridge = mc.getBridge();
-//        for (int i = 1; i <= getInput(); i++) {
-//            Label b = new Label(" Kante " + i + "-" + (i + 1) + ": " + (cBridge[i - 1] == 0 ? "_" : "Brücke "));
-//            ergebnis.add(b, 2, i);
-//        }
+        /*
+        Ausgabe Kanten
+        */
+        Label lKanten = new Label("Kanten: ");
+        ergebnis.add(lKanten, 2, 0);
+        String kant = mc.getKanten();
+        Label c = new Label(kant);
+        ergebnis.add(c, 2, 1);
 
         ergebnis.add(new Separator(), 3, 0);
 
-        Label lKomponenten = new Label("Kanten: ");
-        ergebnis.add(lKomponenten, 4, 0);
-        String[] comps = mc.getKomponenten();
-        for (int i = 1; i <= getInput(); i++) {
-            Label c = new Label(comps[i - 1]);
-            ergebnis.add(c, 4, i);
+        /*
+        Ausgabe Komponenten
+        */
+        Label lKomp = new Label("Komponenten: ");
+        ergebnis.add(lKomp, 4, 0);
+        String[] str = mc.getKomponenten();
+        for (int i = 0; i < getInput(); i++) {
+            Label k = new Label(str[i]);
+            ergebnis.add(k, 4, i + 1);
         }
     }
 

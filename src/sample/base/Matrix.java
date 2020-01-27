@@ -67,6 +67,18 @@ public class Matrix {
         }
     }
 
+    public boolean contains(Matrix mat, int num) {
+        int size = mat.getMatrix().length;
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
+                if (mat.getValue(r, c) == num) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public String toString() {
 
         StringBuilder sb = new StringBuilder();

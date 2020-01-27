@@ -3,6 +3,8 @@ package sample.control;
 import sample.base.WegDistanz;
 import sample.view.MainPane;
 
+import java.util.ArrayList;
+
 public class MainController {
 
     private WegDistanz wd;
@@ -38,22 +40,21 @@ public class MainController {
         return mp;
     }
 
-    public int[] getBridge() {
-        int[] str = new int[wd.getMatrix().length];
-        for (int r = 0; r < wd.getMatrix().length; r++) {
-            int val = 0;
-            for (int c = 0; c < wd.getMatrix().length; c++) {
-                val += wd.getValue(r, c);
-            }
-            str[r] = (val == 1 ? 0 : 1);
-        }
-        return str;
+    public String getKanten() {
+        String kompList = wd.getKanten();
+        return kompList;
     }
 
     public String[] getKomponenten() {
-        String[] kompList = wd.getKanten();
+        String[] str = new String[getKanten().length()];
 
-        return kompList;
+        ArrayList temp = wd.getKomponent();
+
+        for (int i = 0; i < temp.size(); i++) {
+            str[i] = (temp.get(i).toString());
+        }
+
+        return str;
     }
 
     private int[] getArtikulationen() {

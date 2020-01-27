@@ -1,5 +1,7 @@
 package sample.base;
 
+import java.util.ArrayList;
+
 public class WegDistanz extends Matrix {
 
     private int recCounter;
@@ -7,6 +9,7 @@ public class WegDistanz extends Matrix {
     public Matrix wMatrix;
     private int[][] potenz;
     private int[] grade;
+    private ArrayList<ArrayList<Integer>> komponenten;
 
     public WegDistanz(int[][] matrix) {
         super(matrix);
@@ -73,18 +76,92 @@ public class WegDistanz extends Matrix {
         }
     }
 
+    private ArrayList<Integer> getKnotenArray() {
+        ArrayList<Integer> temp = new ArrayList<>();
+        for (int i = 0; i < getMatrix().length; i++) {
+            temp.add(i);
+        }
+        return temp;
+    }
+
     public int[] getGrade() {
         return grade;
     }
 
-    public String[] getKanten() {
-        String[] tmp = new String[getMatrix().length];
-        for (int r = 0; r < getMatrix().length; r++) {
-            tmp[r] = "";
-            for (int c = r; c < getMatrix().length; c++) {
-                tmp[r] += (getValue(r, c) == 1 ? ("{" + (r + 1) + "-" + (c + 1) + "}") : "");
+    public ArrayList<int[]> getBridges(int[][] matrix) {
+        ArrayList bruecken = new ArrayList();
+        int anz = komponenten.size();
+
+        if (matrix != null && contains(this, 1)) {
+            for (int r = 0; r < getMatrix().length; r++) {
+                for (int c = 0; c < getMatrix().length; c++) {
+                    int tempVal = matrix[r][c];
+                    if (tempVal == 1) {
+                        matrix[r][c] = 0;
+                        matrix[c][r] = 0;
+                        getKomponent();
+                        if (anz < komponenten.size()) {
+                            int[] kante = new int[2];
+                            kante[0] = c;
+                            kante[1] = r;
+                            bruecken.add(kante);
+                        }
+                        matrix[r][c] = 1;
+                        matrix[c][r] = 1;
+                    }
+                }
             }
         }
-        return tmp;
+        getKomponent();
+        return bruecken;
+    }
+
+    public String getKanten() {
+        StringBuilder tmp = new StringBuilder();
+        int[] count = new int[getMatrix().length];
+
+        for (int r = 0; r < getMatrix().length; r++) {
+            for (int c = r; c < getMatrix().length; c++) {
+                if (getValue(r, c) == 1) {
+                    count[r]++;
+                    if (count[r] > 1 || count[c] > 1) {
+                        tmp.append("{" + (r + 1) + "-" + (c + 1) + "},");
+                    } else {
+                        tmp.append("-{" + (r + 1) + "-" + (c + 1) + "}-,");
+                    }
+                }
+            }
+        }
+        return tmp.toString();
+    }
+
+    public ArrayList<ArrayList<Integer>> getKomponent() {
+        komponenten = new ArrayList<>();
+        ArrayList<Integer> knoten = getKnotenArray();
+        String komp = "";
+
+        if (wMatrix.contains(wMatrix, 1)) {
+            for (int r = 0; r < getMatrix().length; r++) {
+                ArrayList temp = new ArrayList();
+
+                for (int c = getMatrix().length - 1; c >= r; c--) {
+                    if (wMatrix.getValue(r, c) == 1 && knoten.contains(c)) {
+                        temp.add(0, c + 1);
+                        knoten.remove(new Integer(c));
+                    }
+                }
+
+                if (temp.size() > 0) {
+                    komponenten.add(temp);
+                }
+            }
+        } else {
+            for (int i = 0; i < getMatrix().length; i++) {
+                ArrayList temp = new ArrayList();
+                temp.add(knoten.get(i));
+                komponenten.add(temp);
+            }
+        }
+        return komponenten;
     }
 }
