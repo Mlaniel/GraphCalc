@@ -92,7 +92,7 @@ public class WegDistanz extends Matrix {
         ArrayList bruecken = new ArrayList();
         int anz = komponenten.size();
 
-        if (matrix != null && contains(this, 1)) {
+        if (matrix != null && this.contains(this, 1)) {
             for (int r = 0; r < getMatrix().length; r++) {
                 for (int c = 0; c < getMatrix().length; c++) {
                     int tempVal = matrix[r][c];
@@ -140,7 +140,7 @@ public class WegDistanz extends Matrix {
         ArrayList<Integer> knoten = getKnotenArray();
         String komp = "";
 
-        if (wMatrix.contains(wMatrix, 1)) {
+        if (this.contains(wMatrix, 1)) {
             for (int r = 0; r < getMatrix().length; r++) {
                 ArrayList temp = new ArrayList();
 

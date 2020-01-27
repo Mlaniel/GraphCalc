@@ -57,6 +57,20 @@ public class MainController {
         return str;
     }
 
+    public String getBridges() {
+        ArrayList<int[]> bridges = wd.getBridges(wd.wMatrix.getMatrix());
+        String str = "";
+
+        for (int i = 0; i < bridges.size(); i++) {
+            int[] tmp = bridges.get(i);
+            for (int j : tmp) {
+                str += j + ", ";
+            }
+        }
+
+        return str;
+    }
+
     private int[] getArtikulationen() {
         int[] tmp = new int[wd.getMatrix().length];
         for (int r = 0; r < wd.getMatrix().length; r++) {

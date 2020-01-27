@@ -110,6 +110,10 @@ public class MainPane extends BorderPane {
         String kant = mc.getKanten();
         Label c = new Label(kant);
         ergebnis.add(c, 2, 1);
+//        Label lBridge = new Label("Brücken: ");
+//        ergebnis.add(lBridge, 2, 2);
+//        Label b = new Label(mc.getBridges());
+//        ergebnis.add(b, 2, 3);
 
         ergebnis.add(new Separator(), 3, 0);
 
