@@ -76,10 +76,10 @@ public class WegDistanz extends Matrix {
         }
     }
 
-    private int[] getKnotenArray() {
-        int[] temp = new int[getMatrix().length];
+    private ArrayList<Integer> getKnotenArray() {
+        ArrayList<Integer> temp = new ArrayList();
         for (int i = 0; i < getMatrix().length; i++) {
-            temp[i] = i + 1;
+            temp.add(i, i + 1);
         }
         return temp;
     }
