@@ -79,6 +79,15 @@ public class Matrix {
         return false;
     }
 
+    public boolean rowHasEdge(int row) {
+        for (int c = 0; c < adjazenz.length; c++) {
+            if (adjazenz[row][c] > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String toString() {
 
         StringBuilder sb = new StringBuilder();

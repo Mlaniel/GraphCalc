@@ -99,7 +99,7 @@ public class WegDistanz extends Matrix {
                     if (tempVal == 1) {
                         matrix[r][c] = 0;
                         matrix[c][r] = 0;
-                        getKomponent();
+                        computeKomponent();
                         if (anz < komponenten.size()) {
                             int[] kante = new int[2];
                             kante[0] = c;
@@ -112,7 +112,7 @@ public class WegDistanz extends Matrix {
                 }
             }
         }
-        getKomponent();
+        computeKomponent();
         return bruecken;
     }
 
@@ -135,7 +135,30 @@ public class WegDistanz extends Matrix {
         return tmp.toString();
     }
 
-    public ArrayList<ArrayList<Integer>> getKomponent() {
+    public int getKomp() {
+        int komponenten = 5;
+        // Fill Array
+        ArrayList<Integer> knoten = new ArrayList<>();
+        for (int i = 0; i < getGrade().length; i++) {
+            knoten.add(i);
+        }
+
+        for (int r = 0; r < getGrade().length; r++) {
+            for (int c = 0; c < getGrade().length; c++) {
+                if (wMatrix.getValue(r, c) > 1) {
+                    if (knoten.contains(new Integer(c))) {
+                        knoten.remove(new Integer(c));
+                        komponenten--;
+                    }
+                }
+            }
+        }
+
+
+        return komponenten;
+    }
+
+    public ArrayList<ArrayList<Integer>> computeKomponent() {
         komponenten = new ArrayList<>();
         ArrayList<Integer> knoten = getKnotenArray();
         String komp = "";

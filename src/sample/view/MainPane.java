@@ -120,13 +120,13 @@ public class MainPane extends BorderPane {
         /*
         Ausgabe Komponenten
         */
-        Label lKomp = new Label("Komponenten: ");
+        Label lKomp = new Label("Komponenten: " + mc.getKomp());
         ergebnis.add(lKomp, 4, 0);
-        String[] str = mc.getKomponenten();
-        for (int i = 0; i < getInput(); i++) {
-            Label k = new Label(str[i]);
-            ergebnis.add(k, 4, i + 1);
-        }
+//        String[] str = mc.getKomponenten();
+//        for (int i = 0; i < getInput(); i++) {
+//            Label k = new Label(str[i]);
+//            ergebnis.add(k, 4, i + 1);
+//        }
     }
 
     public MatrixGridPane getMatrixPane() {

@@ -45,14 +45,23 @@ public class MainController {
         return kompList;
     }
 
-    public String[] getKomponenten() {
+    public String[] computeKomponenten() {
         String[] str = new String[getKanten().length()];
 
-        ArrayList temp = wd.getKomponent();
+        ArrayList temp = wd.computeKomponent();
 
         for (int i = 0; i < temp.size(); i++) {
             str[i] = (temp.get(i).toString());
         }
+
+        return str;
+    }
+
+    public String getKomp() {
+        String str = "";
+        int komp = wd.getKomp();
+
+        str += komp;
 
         return str;
     }
